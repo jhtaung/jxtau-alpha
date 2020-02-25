@@ -1,4 +1,9 @@
 import React from 'react';
+
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './reducers/rootReducer';
+
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 import Routes from './Routes';
@@ -14,15 +19,18 @@ const theme = createMuiTheme({
 });
 
 const browserHistory = createBrowserHistory();
+
+const store = createStore(rootReducer);
+
 const App = () => {
   return (
-    <div>
+    <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
           <Routes />
         </Router>
       </ThemeProvider>
-    </div>
+    </Provider>
   )
 }
 
